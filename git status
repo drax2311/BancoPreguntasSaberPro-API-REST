@@ -1,0 +1,43 @@
+[1mdiff --git a/BancoPreguntasSaberPro/src/main/java/co/unicauca/saberpro/access/UserRepositoryFactory.java b/BancoPreguntasSaberPro/src/main/java/co/unicauca/saberpro/access/UserRepositoryFactory.java[m
+[1mindex 8a947e9..e69de29 100644[m
+[1m--- a/BancoPreguntasSaberPro/src/main/java/co/unicauca/saberpro/access/UserRepositoryFactory.java[m
+[1m+++ b/BancoPreguntasSaberPro/src/main/java/co/unicauca/saberpro/access/UserRepositoryFactory.java[m
+[36m@@ -1,38 +0,0 @@[m
+[31m-package co.unicauca.saberpro.access;[m
+[31m-[m
+[31m-/**[m
+[31m- * Fabrica (Singleton) que instancia SQLiteUserRepository o cualquier otra[m
+[31m- * implementacion de IUserRepository que se cree en el futuro. El cliente le[m
+[31m- * pide a la fabrica una abstraccion (IUserRepository) y la fabrica decide[m
+[31m- * que implementacion concreta entregar (Inversion de Dependencias).[m
+[31m- */[m
+[31m-public class UserRepositoryFactory {[m
+[31m-[m
+[31m-    private static UserRepositoryFactory instance;[m
+[31m-[m
+[31m-    private UserRepositoryFactory() {[m
+[31m-    }[m
+[31m-[m
+[31m-    public static UserRepositoryFactory getInstance() {[m
+[31m-        if (instance == null) {[m
+[31m-            instance = new UserRepositoryFactory();[m
+[31m-        }[m
+[31m-        return instance;[m
+[31m-    }[m
+[31m-[m
+[31m-    /**[m
+[31m-     * @param type "file"   -> SQLite en un archivo fisico fijo dentro de[m
+[31m-     *                        ~/BancoPreguntasSaberPro/bancopreguntas.db,[m
+[31m-     *                        sin importar desde que carpeta se ejecute la app.[m
+[31m-     *             "memory" -> SQLite en memoria (util para pruebas)[m
+[31m-     */[m
+[31m-    public IUserRepository getRepository(String type) {[m
+[31m-        switch (type) {[m
+[31m-            case "memory":[m
+[31m-                return new SQLiteUserRepository("jdbc:sqlite::memory:");[m
+[31m-            case "file":[m
+[31m-            default:[m
+[31m-                return new SQLiteUserRepository(AppPaths.getDatabaseUrl());[m
+[31m-        }[m
+[31m-    }[m
+[31m-}[m
